@@ -1,0 +1,13 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div style="float:left;background: aqua" >
+    <div id="counter-app">Loading...</div>
+</div>
+<div style="float:right;background: pink" >
+    <div id="fetch-app">Loading...</div>
+</div>
+
+@section scripts {
+    <script src="~/dist/main.js" asp-append-version="true"></script>
+}
