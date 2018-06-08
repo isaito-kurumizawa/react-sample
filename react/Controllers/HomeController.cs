@@ -13,7 +13,10 @@ namespace react.Controllers
         {
             return View();
         }
-
+        public IActionResult Index2()
+        {
+            return View();
+        }
         public IActionResult Error()
         {
             ViewData["RequestId"] = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
