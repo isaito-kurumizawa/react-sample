@@ -1,63 +1,41 @@
 import * as React from "react";
-import { RouteComponentProps } from "react-router";
 import "isomorphic-fetch";
-
-interface IFetchDataExampleState {
-    forecasts: IWeatherForecast[];
-    loading: boolean;
-}
+import Slider from "react-slick";
 
 export class FetchData extends React.Component<{}, any> {
-    constructor() {
-        super();
-        this.state = { forecasts: [], loading: true };
-
-        fetch("api/SampleData/WeatherForecasts")
-            .then(response => response.json() as Promise<IWeatherForecast[]>)
-            .then(data => {
-                this.setState({ forecasts: data, loading: false });
-            });
-    }
-
     public render(): JSX.Element {
-        let contents: JSX.Element = this.state.loading
-            ? <p><em>Loading...</em></p>
-            : FetchData.renderForecastsTable(this.state.forecasts);
-
-        return  <div>
-                    <h1>Weather forecast</h1>
-                    <p>This component demonstrates fetching data from the server.</p>
-                    {contents}
-                </div>;
+        const settings: any = {
+            className: "center",
+            centerMode: true,
+            infinite: true,
+            centerPadding: "60px",
+            slidesToShow: 3,
+            speed: 500
+        };
+        return (
+            <div>
+                <h2>Center Mode</h2>
+                <Slider {...settings}>
+                    <div>
+                        <h3>1</h3>
+                    </div>
+                    <div>
+                        <h3>2</h3>
+                    </div>
+                    <div>
+                        <h3>3</h3>
+                    </div>
+                    <div>
+                        <h3>4</h3>
+                    </div>
+                    <div>
+                        <h3>5</h3>
+                    </div>
+                    <div>
+                        <h3>6</h3>
+                    </div>
+                </Slider>
+            </div>
+        );
     }
-
-    private static renderForecastsTable(forecasts: IWeatherForecast[]): JSX.Element {
-        return  <table className="table">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Temp. (C)</th>
-                            <th>Temp. (F)</th>
-                            <th>Summary</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {forecasts.map(forecast =>
-                            <tr key={forecast.dateFormatted}>
-                                <td>{forecast.dateFormatted}</td>
-                                <td>{forecast.temperatureC}</td>
-                                <td>{forecast.temperatureF}</td>
-                                <td>{forecast.summary}</td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>;
-    }
-}
-
-interface IWeatherForecast {
-    dateFormatted: string;
-    temperatureC: number;
-    temperatureF: number;
-    summary: string;
 }
